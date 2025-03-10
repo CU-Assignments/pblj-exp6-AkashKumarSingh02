@@ -1,0 +1,32 @@
+import java.util.*;
+import java.util.stream.Collectors;
+
+class Student {
+    String name;
+    double marks;
+
+    public Student(String name, double marks) {
+        this.name = name;
+        this.marks = marks;
+    }
+}
+
+public class StudentFiltering {
+    public static void main(String[] args) {
+        List<Student> students = Arrays.asList(
+            new Student("Akash", 85),
+            new Student("Anuj", 92),
+            new Student("Harsh", 70),
+            new Student("Tiwari", 78),
+            new Student("Karan", 65)
+        );
+
+        List<String> topStudents = students.stream()
+            .filter(student -> student.marks > 75)
+            .sorted(Comparator.comparingDouble((Student s) -> s.marks).reversed())
+            .map(student -> student.name)
+            .collect(Collectors.toList());
+
+        topStudents.forEach(System.out::println);
+    }
+}
